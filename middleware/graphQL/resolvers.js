@@ -6,11 +6,7 @@ const resolvers = {
     Query: {
         getUsers: async () => await User.find({}),//.exec()
         getMessages: async (_,args) => await Message.find({user:args.user}),
-        getRoom: async (_,args) => {
-            console.log("getRoom name: ",args.name);
-            console.log("getRoom room: ",await Room.find({name:args.name}));
-            return await Room.find({name:args.name})
-        },
+        getRoom: async (_,args) => await Room.find({name:args.name}),
     },
     // Mutation: {
     //     createUser: (parent, { id, name, email, age }, context, info) => {

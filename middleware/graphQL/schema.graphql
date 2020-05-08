@@ -1,0 +1,52 @@
+scalar DateTime
+
+type User {
+    id:ID!
+    username: String!,
+    hashedPassword: String!,
+    salt: String!,
+    created: DateTime!,
+    contacts: [String!],
+    blockedContacts: [String!],
+    rooms:[String!]
+}
+
+type Message {
+    id:ID!
+    uniqSig: String!,
+    members: [String!],
+    text: String,
+    user: String!,
+    status: Boolean,
+    statusCheckArr: [String!],
+    date: DateTime,
+}
+
+type ChildRoomMember{
+    id:ID!
+    name:String!,
+    enable:Boolean!,
+    admin:Boolean!,
+    created: DateTime,
+}
+
+type Room {
+    id:ID!
+    name: String!,
+    members: [ChildRoomMember!]!,
+    blockedContacts: [ChildRoomMember!]!,
+    created_at: DateTime,
+}
+
+
+type Query {
+    getUsers: [User],
+    getMessages(user:String!): [Message],
+    getRoom(name:String!):[Room],
+}
+
+#type Mutation {
+#  createUser(id: ID!, name: String!, email: String!, age: Int): User!
+#  updateUser(id: ID!, name: String, email: String, age: Int): User!
+#  deleteUser(id: ID!): User!
+#}
